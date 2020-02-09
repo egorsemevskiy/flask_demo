@@ -4,15 +4,39 @@
 <title>Posts Page</title>
 {% endblock %}
 
+
+
 {% block body %}
 <h1>Posts Page</h1>
+<hr>
+    <h2>Create New Blog Post</h2>
+    <form action="/posts"  method="post">
+        Title :
+        <input  class="form-control" type="text" name="title" id="title" placeholder="Enter Title" aria-label="Enter Title"/>
+        <br>
+        Content :
+        <textarea  class="form-control" rows="5" name="content" id="content" aria-label="Enter Content" placeholder="Enter Content"></textarea>
+        <br>
+        Author :
+        <input  class="form-control" type="text" name="author" placeholder="Enter Author"  aria-label="Enter Author" id="author"/>
+        <br>
+        <input class="btn btn-primary"  type="submit" value="Post">
+
+    </form>
+<hr>
+
     {% for post in posts %}
         <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
+
         {% if post.author %}
             <h3>{{ post.author }}</h3>
         {% else %}
             <h3>Anonymous</h3>
         {% endif %}
+        <h5>{{post.data_posted}}</h5>
+        <p>{{ post.content }}</p>
+        <a class="btn btn-danger" href="/posts/delete/{{post.id}}">Delete</a>
+        <a  class="btn btn-primary"  href="/posts/edit/{{post.id}}">Edit</a>
+        <hr>
     {% endfor%}
 {% endblock %}
